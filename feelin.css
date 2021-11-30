@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500&display=swap');
+
+* {
+    margin:0;
+    padding:0;
+    overflow: visible;
+    font-family: 'IBM Plex Sans', sans-serif;
+   }
+ 
+.body
+ {
+     border: 1rem;
+ }
+
+.headers
+{
+    background-color: rgb(255, 255, 0);
+    position: sticky;
+    top: 0rem;
+}
+
+.logo
+{
+    display: flex;
+    flex-direction: row; 
+    flex-wrap: nowrap;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.logo p
+{
+    display: flex;
+    align-self: center;
+    font-family: 'IBM Plex Sans', sans-serif;
+    font-weight: 1000;
+    font-size: 3rem;
+}
+
+.iconos
+{
+    display: flex;
+    align-self: center;
+    display: inline-block;
+    position: absolute;
+    padding-left: 60rem;
+}
+
+a{
+
+    text-decoration: none;
+
+}
+
+
+.lista
+{
+    display: flex;
+    list-style: none;
+    padding-left: 3rem;
+    padding-bottom: 2rem;
+    justify-content: space-evenly;
+}
+
+.contenido
+{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    background-color: thistle;
+    justify-content: center;
+    align-items: center;
+    position:inherit;
+
+}
+
+h1
+{
+    padding-top: 3rem;
+}
+.videoSection
+{
+   display: flex;
+   justify-self: center;
+   padding-top: 2rem;
+   padding-bottom: 3rem;
+}
+
+.footer
+{
+    display: flex;
+    background-color: rgb(255, 255, 0);
+    padding: 1%;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.footer p 
+{
+    padding-top: 1rem;
+}
+
+.preguntasFrecuentes
+{
+    align-self: flex-start;
+    text-decoration: none;
+}
+
+.footer div
+{
+    display: flex;
+    flex-direction: row;
+    padding-top: 1rem;
+    display: inline-block;
+}
+
+.pages
+{
+    display: flex;
+    flex-direction: column;
+    background-color: thistle;
+    padding: 4rem 1rem 4rem 1rem;
+}
+
+.contactanos
+{
+    display: flex;
+    align-self: center;
+}
+
+.contacto 
+{
+    display: flex;
+    flex-direction: inherit;
+    align-self: center;
+    width: 20rem;
+    border-style: solid;
+    border-color: ivory;
+    background-color: ivory;
+}
+
+.listaProductos
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.listaProductos
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 150px;
+    padding: 1rem;
+    margin: 1rem;
+    font-size: 1rem;
+}
+
+.listaProductos p
+{
+    display: flex;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.listaProductos img
+{
+    display: flex;
+    margin: 1rem;
+}
