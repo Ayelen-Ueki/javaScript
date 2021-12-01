@@ -1,7 +1,7 @@
 const antojos = 
 [
     {id: 1, nombre: "alfajorcitos", precio: 500},
-    {id: 2, nombre: "cookies", precio: 300},
+    {id: 2, nombre: "cookies", precio: 300}
 ]
 let carrito = [];
 
@@ -17,40 +17,29 @@ function agregarCarrito ()
     let botonId = this.id
     let prodEncontrado = antojos.find ( p => botonId === p.nombre)
     carrito.push (prodEncontrado)
-    console.log(this.id)
-    console.log(carrito)
+}
+ 
+console.log(carrito)
+
+let elementosCarrito = $('#productosEnCarrito');    
+
+for (let productos of carrito)
+{
+    elementosCarrito.append(`
+     <div id="producto_${productos.id}">
+        <h3> Producto:${productos.nombre}</h3>
+        <b> Precio: $${productos.precio} </b>
+     </div>
+     `)
 }
 
-let carritoStorage = (key, value) => {localStorage.setItem(key, value)}
+    localStorage.setItem("Carrito", JSON.stringify(carrito))
 
-carritoStorage ("Productos en el carrito", JSON.stringify(carrito))
-
-// for (const producto of carrito)
-// {
-//     carritoStorage(producto.nombre, JSON.stringify(producto) )
-// }
-
-const productosGuardados = JSON.parse(localStorage.getItem ("Productos en el carrito"))
-
-console.log(productosGuardados)
-
-// let carritoRecuperado = []
-
-// for (const objeto of productosGuardados)
-// {
-//     carritoRecuperado.push(new Compra (objeto))
-// }
+    let carritoGuardado = JSON.parse(localStorage.getItem("Carrito"))
 
 
-// class Compra
-// {
-//     constructor (obj)
-//     {
-//         this.id = obj.id();
-//         this.nombre = obj.nombre();
-//         this.precio = parseFloat(obj.precio);
-//     }
-// }
+
+
 
 
 
