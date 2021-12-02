@@ -19,12 +19,12 @@ function agregarCarrito() {
         let prodEncontrado = antojos.find(p => botonId === p.nombre)
         carritoGuardado.push(prodEncontrado)
         localStorage.setItem("Carrito", JSON.stringify(carritoGuardado))
-        // Swal.fire({
-        //     icon: 'Success',
-        //     title: 'Gracias!',
-        //     text: 'Has agregado un nuevo item al carrrito',
-        //     footer: '<a href="">Ver carrito</a>'
-        //     })
+        Swal.fire({
+            icon: 'Success',
+            title: 'Gracias!',
+            text: 'Has agregado un nuevo item al carrrito',
+            footer: '<a href="">Ver carrito</a>'
+            })
     }
 
     else {
@@ -32,20 +32,21 @@ function agregarCarrito() {
         let prodEncontrado = antojos.find(p => botonId === p.nombre)
         carrito.push(prodEncontrado)
         localStorage.setItem("Carrito", JSON.stringify(carrito))
-        // Swal.fire({
-        //     icon: 'Success',
-        //     title: 'Gracias!',
-        //     text: 'Has agregado un nuevo item al carrrito',
-        //     footer: '<a href="">Ver carrito</a>'
-        //     })
+        Swal.fire({
+            icon: 'Success',
+            title: 'Gracias!',
+            text: 'Has agregado un nuevo item al carrrito',
+            footer: '<a href="">Ver carrito</a>'
+            })
     }
     mostrarCarrito()
+    calculototal()
 }
 
 function mostrarCarrito() {
     let carritoGuardado = JSON.parse(localStorage.getItem("Carrito"))
     if (carritoGuardado) {
-        let carritoActualizado = carritoGuardado[carritoGuardado.length - 1];
+        let carritoActualizado =carritoGuardado[carritoGuardado.length -1]
         elementosCarrito.append(`
     <div id="producto_${carritoActualizado.id}">
         <h3> Producto:${carritoActualizado.nombre}</h3>
@@ -56,8 +57,19 @@ function mostrarCarrito() {
     }
 }
 
+// function calculototal()
+// {
+//     let carritoGuardado = JSON.parse(localStorage.getItem("Carrito"))
+//     if (carritoGuardado)
+//     {
+//         for (let monto of carritoGuardado)
+//         {
+//             monto = (carritoGuardado[carritoGuardado.length-1].precio) + (carritoGuardado[carritoGuardado.length-2].precio);
+//             console.log(monto)
+//         }     
+//     }
 
-
+// }
 
 
 
