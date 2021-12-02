@@ -1,12 +1,12 @@
 const antojos =
     [
         { id: 1, nombre: "alfajorcitos", precio: 500 },
+        { id: 1, nombre: "aRogel", precio: 500 },
         { id: 2, nombre: "cookies", precio: 300 }
     ]
 let carrito = [];
 let elementosCarrito = $('#productosEnCarrito');
 let botones = document.getElementsByClassName("botonCompra")
-mostrarCarrito()
 
 for (let boton of botones) {
     boton.addEventListener("click", agregarCarrito)
@@ -14,12 +14,17 @@ for (let boton of botones) {
 
 function agregarCarrito() {
     let carritoGuardado = JSON.parse(localStorage.getItem("Carrito"))
-    console.log(carritoGuardado)
     if (carritoGuardado) {
         let botonId = this.id
         let prodEncontrado = antojos.find(p => botonId === p.nombre)
         carritoGuardado.push(prodEncontrado)
         localStorage.setItem("Carrito", JSON.stringify(carritoGuardado))
+        // Swal.fire({
+        //     icon: 'Success',
+        //     title: 'Gracias!',
+        //     text: 'Has agregado un nuevo item al carrrito',
+        //     footer: '<a href="">Ver carrito</a>'
+        //     })
     }
 
     else {
@@ -27,24 +32,31 @@ function agregarCarrito() {
         let prodEncontrado = antojos.find(p => botonId === p.nombre)
         carrito.push(prodEncontrado)
         localStorage.setItem("Carrito", JSON.stringify(carrito))
+        // Swal.fire({
+        //     icon: 'Success',
+        //     title: 'Gracias!',
+        //     text: 'Has agregado un nuevo item al carrrito',
+        //     footer: '<a href="">Ver carrito</a>'
+        //     })
     }
     mostrarCarrito()
 }
 
-console.log(carrito)
-
 function mostrarCarrito() {
     let carritoGuardado = JSON.parse(localStorage.getItem("Carrito"))
-    if (carritoGuardado)
-    {for (let productos of carritoGuardado) {
+    if (carritoGuardado) {
+        let carritoActualizado = carritoGuardado[carritoGuardado.length - 1];
         elementosCarrito.append(`
-     <div id="producto_${productos.id}">
-        <h3> Producto:${productos.nombre}</h3>
-        <b> Precio: $${productos.precio} </b>
-     </div>
-     `)
-    }}
+    <div id="producto_${carritoActualizado.id}">
+        <h3> Producto:${carritoActualizado.nombre}</h3>
+        <b> Precio: $${carritoActualizado.precio} </b>
+    </div>
+        `)
+
+    }
 }
+
+
 
 
 

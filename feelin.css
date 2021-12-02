@@ -1,96 +1,170 @@
-@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Dosis:wght@300&family=Fira+Sans:wght@100&family=Hind+Siliguri:wght@300&family=IBM+Plex+Sans:wght@500&display=swap');
 * {
-    margin:0;
-    padding:0;
+    margin:0rem;
     overflow: visible;
-    font-family: 'IBM Plex Sans', sans-serif;
-   }
+    font-family: 'Dosis', sans-serif;
+}
+
+:root
+{
+    --color-amarillofeelin: #FFE300; 
+    --color-naranjafeelin: #FF7800;
+    --color-salmonfeelin: #FFBC97;
+    --color-blancofeelin:#F7F7F7;
+}
  
 .body
- {
-     border: 1rem;
- }
-
-.headers
 {
-    background-color: rgb(255, 255, 0);
+    border: 1rem;
+}
+
+.header
+{
+    background-color: var(--color-amarillofeelin);
+    position: relative;
     position: sticky;
     top: 0rem;
 }
 
+
 .logo
 {
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+}
+
+.logo
+{
+    display: grid;
+    grid-column: 2/3;
+}
+
+.logo a
+{
+    padding:1rem;
+    display: grid;
+    grid-column: 2/3;
+    justify-items: center;
+
+}
+
+.logo a img
+{
     display: flex;
-    flex-direction: row; 
-    flex-wrap: nowrap;
-    justify-content: center;
-    padding: 2rem;
+    width: 7rem;
 }
 
 .logo p
 {
-    display: flex;
-    align-self: center;
-    font-family: 'IBM Plex Sans', sans-serif;
-    font-weight: 1000;
-    font-size: 3rem;
+    font-size: 2.5rem;
+    text-align: center;
+    font-weight: bolder;
+    display: grid;
+    grid-column: 2/3;
+    justify-content: center;
+}
+
+.iconos
+{
+    display: grid;
+   grid-column: 3/3;
 }
 
 .iconos
 {
     display: flex;
     align-self: center;
+    position: relative;
     display: inline-block;
-    position: absolute;
-    padding-left: 60rem;
+}
+
+.iconos img
+{
+    padding-left: 1rem;
+    width: 1.5rem;
+    height: 1.5rem;
 }
 
 a{
 
     text-decoration: none;
-
 }
 
 
-.lista
+nav
+{
+    display: grid;
+    justify-content: center;
+}
+
+nav ul
+{
+    display: grid;
+    justify-content: center;
+}
+
+nav ul
 {
     display: flex;
+    flex-direction: row;
     list-style: none;
-    padding-left: 3rem;
-    padding-bottom: 2rem;
-    justify-content: space-evenly;
+    width: 2rem;
+    position: relative;
 }
+
+nav ul li
+{
+    padding: 0rem 4rem 0rem 0rem;
+}
+
 
 .contenido
 {
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
-    background-color: thistle;
+    background-color: var(--color-blancofeelin);
     justify-content: center;
     align-items: center;
-    position:inherit;
-
+    padding: 1rem;
 }
 
-h1
+.contenido h1
 {
-    padding-top: 3rem;
+    display: flex;
+    padding: 1rem 0rem 1rem 0rem;
 }
+
+.main
+{
+    display: flex;
+    padding: 1rem;
+}
+
+.main h1
+{
+    display: flex;
+    padding: 1rem 0rem 1rem 0rem;
+}
+
 .videoSection
 {
    display: flex;
    justify-self: center;
-   padding-top: 2rem;
-   padding-bottom: 3rem;
 }
 
+.videoSection video
+{
+    display: flex;
+    width: 15rem;
+    height: 30rem;
+}
 .footer
 {
     display: flex;
-    background-color: rgb(255, 255, 0);
-    padding: 1%;
+    position:relative;
+    background-color: var(--color-naranjafeelin);
+    padding: 0rem 1rem 0.5rem 1rem;
     flex-direction: column;
     align-items: flex-end;
 }
@@ -110,7 +184,6 @@ h1
 {
     display: flex;
     flex-direction: row;
-    padding-top: 1rem;
     display: inline-block;
 }
 
@@ -118,10 +191,30 @@ h1
 {
     display: flex;
     flex-direction: column;
-    background-color: thistle;
-    padding: 4rem 1rem 4rem 1rem;
+    padding: 1rem 1rem 1rem 1rem;
 }
 
+.pagesN
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    padding: 1rem 10rem 1rem 10rem;
+    font-size: 170%;
+    text-align: justify;
+}
+
+#Nosotros
+{
+    width: 15rem;
+    padding-left: 2rem;
+}
+
+.pages h1
+{
+    display: flex;
+    padding: 1rem 0rem 1rem 0rem;
+}
 .contactanos
 {
     display: flex;
@@ -135,36 +228,70 @@ h1
     align-self: center;
     width: 20rem;
     border-style: solid;
-    border-color: ivory;
-    background-color: ivory;
+    border-color: var(--color-salmonfeelin);
+    background-color: var(--color-salmonfeelin);
 }
 
 .listaProductos
 {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    list-style: none;
+    grid-gap: 1rem;
+    justify-items: center;
 }
 
-.listaProductos
+.listaProductos li 
 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 150px;
-    padding: 1rem;
-    margin: 1rem;
-    font-size: 1rem;
+    display: grid;
+    justify-items: center;
+    display: grid;
+    grid-template-rows: auto;
+    font-weight: bold;
+    font-size: 110%;
 }
-
 .listaProductos p
 {
     display: flex;
-    font-weight: bold;
-    text-decoration: underline;
+    padding-bottom: 1rem;
+    font-size: 70%;
 }
 
 .listaProductos img
 {
     display: flex;
     margin: 1rem;
+}
+
+/* MEDIA QUERIES */
+
+@media screen and (max-width: 874px) 
+{
+    .logo a img
+    {
+        display: flex;
+        width: 4rem;
+
+    }
+
+    .logo p
+    {
+        font-size: 1.5rem;
+    }
+
+    .iconos img
+    {
+        padding-left: 1rem;
+        width: 1rem;
+        height: 1rem;
+    }
+
+    nav ul li
+    {
+        padding: 0rem 2rem 0rem 0rem;
+    }
+    .listaProductos
+    {
+        display: inline-block;
+    }
 }
