@@ -67,14 +67,7 @@
 .iconos
 {
     display: grid;
-   grid-column: 3/3;
-}
-
-.iconos
-{
-    display: flex;
-    align-self: center;
-    position: relative;
+    grid-column: 3/3;
     display: inline-block;
 }
 

@@ -6,11 +6,15 @@ const antojos =
     ]
 let carrito = [];
 let elementosCarrito = $('#productosEnCarrito');
+
+// Reemplazar con JQuery
 let botones = document.getElementsByClassName("botonCompra")
 
 for (let boton of botones) {
     boton.addEventListener("click", agregarCarrito)
 }
+
+// $(`.botonCompra`).on("click", agregarCarrito);
 
 function agregarCarrito() {
     let carritoGuardado = JSON.parse(localStorage.getItem("Carrito"))
@@ -24,7 +28,7 @@ function agregarCarrito() {
             title: 'Gracias!',
             text: 'Has agregado un nuevo item al carrrito',
             footer: '<a href="">Ver carrito</a>'
-            })
+        })
     }
 
     else {
@@ -37,7 +41,7 @@ function agregarCarrito() {
             title: 'Gracias!',
             text: 'Has agregado un nuevo item al carrrito',
             footer: '<a href="">Ver carrito</a>'
-            })
+        })
     }
     mostrarCarrito()
     calculototal()
@@ -46,11 +50,15 @@ function agregarCarrito() {
 function mostrarCarrito() {
     let carritoGuardado = JSON.parse(localStorage.getItem("Carrito"))
     if (carritoGuardado) {
-        let carritoActualizado =carritoGuardado[carritoGuardado.length -1]
+        let carritoActualizado = carritoGuardado[carritoGuardado.length - 1]
         elementosCarrito.append(`
     <div id="producto_${carritoActualizado.id}">
-        <h3> Producto:${carritoActualizado.nombre}</h3>
-        <b> Precio: $${carritoActualizado.precio} </b>
+        <ul>
+            <li>
+                <h3> Producto:${carritoActualizado.nombre}</h3>
+                <b> Precio: $${carritoActualizado.precio} </b>
+            </li>
+        </ul>
     </div>
         `)
 
