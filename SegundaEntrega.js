@@ -20,7 +20,7 @@ function agregarCarrito() {
         carritoGuardado.push(prodEncontrado)
         localStorage.setItem("Carrito", JSON.stringify(carritoGuardado))
         Swal.fire({
-            icon: 'Success',
+            icon: 'success',
             title: 'Gracias!',
             text: 'Has agregado un nuevo item al carrrito',
             footer: '<a href="">Ver carrito</a>'
@@ -33,7 +33,7 @@ function agregarCarrito() {
         carrito.push(prodEncontrado)
         localStorage.setItem("Carrito", JSON.stringify(carrito))
         Swal.fire({
-            icon: 'Success',
+            icon: 'success',
             title: 'Gracias!',
             text: 'Has agregado un nuevo item al carrrito',
             footer: '<a href="">Ver carrito</a>'
