@@ -5,7 +5,6 @@ const antojos =
         { id: 2, nombre: "cookies", precio: 300 }
     ]
 let carrito = [];
-let elementosCarrito = $('#productosEnCarrito');
 
 // Reemplazar con JQuery
 let botones = document.getElementsByClassName("botonCompra")
@@ -18,7 +17,7 @@ for (let boton of botones) {
     boton.addEventListener("click", calculototal)
 }
 
-// $(`.finCompra`).on("click", compraFinalizada);
+$("#finCompra").on("click", compraFinalizada);
 
 // $(`.botonCompra`).on("click", agregarCarrito);
 
@@ -55,43 +54,53 @@ function agregarCarrito() {
 
 function mostrarCarrito() {
     let carritoGuardado = JSON.parse(localStorage.getItem("Carrito"))
-    if (carritoGuardado) {
-        let carritoActualizado = carritoGuardado[carritoGuardado.length - 1]
-            elementosCarrito.append(`
-        <div id="producto_${carritoActualizado.id}">
-                <ul>
-                <li>
-                    <h3> Producto:${carritoActualizado.nombre}</h3>
-                    <b> Precio: $${carritoActualizado.precio} </b>
-                </li>
-            </ul>
-        </div>
-            `)
-
-        }
+    let elementosCarrito = document.createElement("ul")
+    elementosCarrito.id = "listaCarrito"
+    for (let productos of carritoGuardado) {
+        let li = document.createElement("li")
+        li.innerHTML= `<h3> Producto:${productos.nombre}</h3>
+        <b> Precio: $${productos.precio} </b>`
+        elementosCarrito.appendChild(li)
+    }
+    let productosAgregados=document.getElementById('productosEnCarrito')
+    productosAgregados.innerHTML=""
+    productosAgregados.appendChild(elementosCarrito)
 }
 
-function calculototal()
-{
+function calculototal() {
     let carritoGuardado = JSON.parse(localStorage.getItem("Carrito"))
-    if (carritoGuardado.length>=1)
-    {
-        let compra = carritoGuardado.map(item => item.precio).reduce((prev, curr) => prev + curr, 0);
-        console.log(compra)
-        return compra
+    if (carritoGuardado) {
+        if (carritoGuardado.length >= 1) {
+            let compra = carritoGuardado.map(item => item.precio).reduce((prev, curr) => prev + curr, 0);
+            console.log(compra)
+            return compra
+        }
     }
 }
 
 
 
-// function compraFinalizada (){
-
-//      elementosCarrito.append(`
-//     <div>
-//         <h3> Total:${calculototal}</h3>
-//     </div>
-//         `)
-// }
+function compraFinalizada(e) {
+    e.preventDefault()
+    if (!calculototal()) {
+        Swal.fire({
+            icon: 'error',
+            title: 'Ojo!!',
+            text: `Todavía no hay nada en el carrito`,
+            footer: '<a href="">Ver carrito</a>',
+        })
+    }
+    else {
+        localStorage.clear()
+        $("#listaCarrito").remove();
+        Swal.fire({
+            icon: 'success',
+            title: 'Gracias!',
+            text: `Compra finalizada, el precio total es de: ${calculototal()}`,
+            footer: '<a href="">Ver carrito</a>',
+        })
+    }
+}
 
 
 
