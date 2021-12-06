@@ -1,8 +1,8 @@
 const antojos =
     [
         { id: 1, nombre: "alfajorcitos", precio: 500 },
-        { id: 1, nombre: "aRogel", precio: 600 },
-        { id: 2, nombre: "cookies", precio: 300 }
+        { id: 2, nombre: "aRogel", precio: 600 },
+        { id: 3, nombre: "cookies", precio: 300 }
     ]
 let carrito = [];
 
@@ -91,7 +91,6 @@ function compraFinalizada(e) {
         })
     }
     else {
-        localStorage.clear()
         $("#listaCarrito").remove();
         Swal.fire({
             icon: 'success',
@@ -99,6 +98,7 @@ function compraFinalizada(e) {
             text: `Compra finalizada, el precio total es de: ${calculototal()}`,
             footer: '<a href="">Ver carrito</a>',
         })
+        localStorage.clear()
     }
 }
 
