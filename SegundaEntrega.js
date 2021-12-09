@@ -9,9 +9,7 @@ let carrito = [];
 // Reemplazar con JQuery
 let botones = document.getElementsByClassName("botonCompra")
 
-for (let boton of botones) {
-    boton.addEventListener("click", agregarCarrito)
-}
+$(`.botonCompra`).on("click", agregarCarrito);
 
 for (let boton of botones) {
     boton.addEventListener("click", calculototal)
@@ -19,7 +17,9 @@ for (let boton of botones) {
 
 $("#finCompra").on("click", compraFinalizada);
 
-// $(`.botonCompra`).on("click", agregarCarrito);
+function guardarLocal(nombre, array){
+    localStorage.setItem(nombre, JSON.stringify(array))
+}
 
 function agregarCarrito() {
     let carritoGuardado = JSON.parse(localStorage.getItem("Carrito"))
@@ -27,7 +27,7 @@ function agregarCarrito() {
         let botonId = this.id
         let prodEncontrado = antojos.find(p => botonId === p.nombre)
         carritoGuardado.push(prodEncontrado)
-        localStorage.setItem("Carrito", JSON.stringify(carritoGuardado))
+        guardarLocal("Carrito", carritoGuardado)
         Swal.fire({
             icon: 'success',
             title: 'Gracias!',
@@ -41,7 +41,7 @@ function agregarCarrito() {
         let botonId = this.id
         let prodEncontrado = antojos.find(p => botonId === p.nombre)
         carrito.push(prodEncontrado)
-        localStorage.setItem("Carrito", JSON.stringify(carrito))
+        guardarLocal("Carrito", carrito)
         Swal.fire({
             icon: 'success',
             title: 'Gracias!',
@@ -103,9 +103,24 @@ function compraFinalizada(e) {
 }
 
 
+$("#envio").on("click", calculoEnvio);
 
 
-
+function calculoEnvio(){
+    Swal.fire({
+        title: 'Envío',
+        html:
+          'Dirección: ' + '<input id="swal-input1" class="swal2-input">'+ '<br>'+
+          'Código Postal:' + '<input id="swal-input2" class="swal2-input">' + '</br>',
+        focusConfirm: false,
+        preConfirm: () => {
+          return [
+            document.getElementById('swal-input1').value,
+            document.getElementById('swal-input2').value
+          ]
+        }
+      })
+}
 
 
 

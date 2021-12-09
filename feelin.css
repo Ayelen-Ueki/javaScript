@@ -288,3 +288,10 @@ nav ul li
         display: inline-block;
     }
 }
+
+.compra
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
