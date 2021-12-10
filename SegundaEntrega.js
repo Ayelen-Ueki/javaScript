@@ -6,18 +6,14 @@ const antojos =
     ]
 let carrito = [];
 
-// Reemplazar con JQuery
-let botones = document.getElementsByClassName("botonCompra")
 
 $(`.botonCompra`).on("click", agregarCarrito);
 
-for (let boton of botones) {
-    boton.addEventListener("click", calculototal)
-}
+$(`.botonCompra`).on("click", calculototal);
 
 $("#finCompra").on("click", compraFinalizada);
 
-function guardarLocal(nombre, array){
+function guardarLocal(nombre, array) {
     localStorage.setItem(nombre, JSON.stringify(array))
 }
 
@@ -56,15 +52,38 @@ function mostrarCarrito() {
     let carritoGuardado = JSON.parse(localStorage.getItem("Carrito"))
     let elementosCarrito = document.createElement("ul")
     elementosCarrito.id = "listaCarrito"
-    for (let productos of carritoGuardado) {
+    for (let id in carritoGuardado) {
+        let productos = carritoGuardado[id]
         let li = document.createElement("li")
-        li.innerHTML= `<h3> Producto:${productos.nombre}</h3>
-        <b> Precio: $${productos.precio} </b>`
+        li.innerHTML = `<h3 id=${productos.id}> Producto:${productos.nombre}</h3>
+        <b> Precio: $${productos.precio} </b>
+        <br><button id= "carrito_${id} class="eliminar">🗑️</button></br>`
         elementosCarrito.appendChild(li)
     }
-    let productosAgregados=document.getElementById('productosEnCarrito')
-    productosAgregados.innerHTML=""
+    let productosAgregados = document.getElementById('productosEnCarrito')
+    productosAgregados.innerHTML = ""
     productosAgregados.appendChild(elementosCarrito)
+    eliminarProducto()
+}
+
+let botones = document.getElementsByClassName("eliminar")
+
+function eliminarProducto() {
+    for (const boton of botones) {
+        let carritoGuardado = JSON.parse(localStorage.getItem("Carrito"))
+            boton.onclick = () => {
+            let id = boton.getAttribute("id");
+            idNumber = id.split("_")[1]
+            carritoGuardado.splice(idNumber, 1)
+
+            Swal.fire({
+                icon: 'success',
+                title: 'Eliminado!',
+                text: 'Tu producto ha sido eliminado con éxito',
+                footer: '<a href="">Ver carrito</a>',
+            })
+        }
+    }
 }
 
 function calculototal() {
@@ -106,20 +125,20 @@ function compraFinalizada(e) {
 $("#envio").on("click", calculoEnvio);
 
 
-function calculoEnvio(){
+function calculoEnvio() {
     Swal.fire({
         title: 'Envío',
         html:
-          'Dirección: ' + '<input id="swal-input1" class="swal2-input">'+ '<br>'+
-          'Código Postal:' + '<input id="swal-input2" class="swal2-input">' + '</br>',
+            'Dirección: ' + '<input id="swal-input1" class="swal2-input">' + '<br>' +
+            'Código Postal:' + '<input id="swal-input2" class="swal2-input">' + '</br>',
         focusConfirm: false,
         preConfirm: () => {
-          return [
-            document.getElementById('swal-input1').value,
-            document.getElementById('swal-input2').value
-          ]
+            return [
+                document.getElementById('swal-input1').value,
+                document.getElementById('swal-input2').value
+            ]
         }
-      })
+    })
 }
 
 
