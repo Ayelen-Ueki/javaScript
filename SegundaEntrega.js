@@ -1,11 +1,9 @@
 const antojos =
     [
-        { id: 1, nombre: "alfajorcitos", precio: 500 },
-        { id: 2, nombre: "aRogel", precio: 600 },
-        { id: 3, nombre: "cookies", precio: 300 }
+        { id: 1, nombre: "alfajorcitos", precio: 500, cantidad: 0 },
+        { id: 2, nombre: "aRogel", precio: 600, cantidad: 0 },
+        { id: 3, nombre: "cookies", precio: 300, cantidad: 0 }
     ]
-let carrito = [];
-
 
 $(`.botonCompra`).on("click", agregarCarrito);
 
@@ -19,10 +17,10 @@ function guardarLocal(nombre, array) {
 
 function agregarCarrito() {
     let carritoGuardado = JSON.parse(localStorage.getItem("Carrito"))
-    if (carritoGuardado) {
+    if (carritoGuardado && carritoGuardado.length) {
         let botonId = this.id
-        let prodEncontrado = antojos.find(p => botonId === p.nombre)
-        carritoGuardado.push(prodEncontrado)
+        let prodEncontrado = carritoGuardado.find(p => botonId === p.nombre)
+        prodEncontrado.cantidad += 1
         guardarLocal("Carrito", carritoGuardado)
         Swal.fire({
             icon: 'success',
@@ -34,9 +32,12 @@ function agregarCarrito() {
     }
 
     else {
+        let carrito = []
         let botonId = this.id
         let prodEncontrado = antojos.find(p => botonId === p.nombre)
-        carrito.push(prodEncontrado)
+        let nuevo = prodEncontrado
+        nuevo.cantidad = 1
+        carrito.push(nuevo)
         guardarLocal("Carrito", carrito)
         Swal.fire({
             icon: 'success',
@@ -47,43 +48,45 @@ function agregarCarrito() {
     }
     mostrarCarrito()
 }
+mostrarCarrito()
 
 function mostrarCarrito() {
     let carritoGuardado = JSON.parse(localStorage.getItem("Carrito"))
-    let elementosCarrito = document.createElement("ul")
-    elementosCarrito.id = "listaCarrito"
-    for (let id in carritoGuardado) {
-        let productos = carritoGuardado[id]
-        let li = document.createElement("li")
-        li.innerHTML = `<h3 id=${productos.id}> Producto:${productos.nombre}</h3>
-        <b> Precio: $${productos.precio} </b>
-        <br><button id= "carrito_${id} class="eliminar">🗑️</button></br>`
-        elementosCarrito.appendChild(li)
+    if (carritoGuardado) {
+        let elementosCarrito = document.createElement("ul")
+        elementosCarrito.id = "listaCarrito"
+        for (let producto of carritoGuardado) {
+            let li = document.createElement("li")
+            li.innerHTML = `<h3 id=${producto.id}> Producto:${producto.nombre}</h3>
+        <b> Precio: $${producto.precio} </b>
+        <button id= ${producto.id} class="eliminar">🗑️</button>`
+            elementosCarrito.appendChild(li)
+        }
+        let productosAgregados = document.getElementById('productosEnCarrito')
+        productosAgregados.innerHTML = ""
+        productosAgregados.appendChild(elementosCarrito)
+        $(`.eliminar`).click(eliminarProducto)
+        console.log($(`.eliminar`))
     }
-    let productosAgregados = document.getElementById('productosEnCarrito')
-    productosAgregados.innerHTML = ""
-    productosAgregados.appendChild(elementosCarrito)
-    eliminarProducto()
 }
 
 let botones = document.getElementsByClassName("eliminar")
 
-function eliminarProducto() {
-    for (const boton of botones) {
-        let carritoGuardado = JSON.parse(localStorage.getItem("Carrito"))
-            boton.onclick = () => {
-            let id = boton.getAttribute("id");
-            idNumber = id.split("_")[1]
-            carritoGuardado.splice(idNumber, 1)
+function eliminarProducto(e) {
+    let button = e.target
+    let carrito = JSON.parse(localStorage.getItem("Carrito"))
+    carrito = carrito.filter(producto => producto.id != button.id)
+    console.log(button.id)
 
-            Swal.fire({
-                icon: 'success',
-                title: 'Eliminado!',
-                text: 'Tu producto ha sido eliminado con éxito',
-                footer: '<a href="">Ver carrito</a>',
-            })
-        }
-    }
+    guardarLocal("Carrito", carrito)
+
+    Swal.fire({
+        icon: 'success',
+        title: 'Eliminado!',
+        text: 'Tu producto ha sido eliminado con éxito',
+        footer: '<a href="">Ver carrito</a>',
+    })
+    mostrarCarrito()
 }
 
 function calculototal() {
@@ -128,26 +131,36 @@ $("#envio").on("click", calculoEnvio);
 function calculoEnvio() {
     Swal.fire({
         title: 'Envío',
-        html:
-            'Dirección: ' + '<input id="swal-input1" class="swal2-input">' + '<br>' +
-            'Código Postal:' + '<input id="swal-input2" class="swal2-input">' + '</br>',
+        input: 'number',
+        inputLabel: 'Código Postal',
         focusConfirm: false,
-        preConfirm: () => {
-            return [
-                document.getElementById('swal-input1').value,
-                document.getElementById('swal-input2').value
-            ]
-        }
+    })
+    $(".swal2-confirm").click(mostrarEnvio);
+}
+
+function mostrarEnvio() {
+    let cp = Swal.getInput().value
+    Swal.fire({
+        title: 'Envío', 
+        text: 'Tu código Postal es: ' + cp,
+        focusConfirm: false,
     })
 }
 
 
-
-
-
-
-
-
+function mostrar()
+{let flag = true;
+$("#mostrar").click(() => {
+    if (flag) {
+        $("#listaCarrito").slideUp("slow")
+        $("#mostrar").html("Mostrar")
+    }
+    else {
+        $("#listaCarrito").slideDown("slow")
+        $("#mostrar").html("Ocultar")
+    }
+    flag = !flag;
+})}
 
 
 

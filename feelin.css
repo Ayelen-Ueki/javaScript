@@ -295,3 +295,16 @@ nav ul li
     flex-direction: column;
     justify-content: start;
 }
+
+li
+{
+    list-style: none;
+}
+
+#botonesCompra
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    width: 100px;
+}
