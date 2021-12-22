@@ -1,9 +1,8 @@
-const antojos =
-    [
-        { id: 1, nombre: "alfajorcitos", precio: 500, cantidad: 0 },
-        { id: 2, nombre: "aRogel", precio: 600, cantidad: 0 },
-        { id: 3, nombre: "cookies", precio: 300, cantidad: 0 }
-    ]
+const antojos = [];
+
+$.getJSON(`../antojos.json`, function (antojate) {
+    antojate.forEach(productos => antojos.push(productos))
+})
 
 $(`.botonCompra`).on("click", agregarCarrito);
 
@@ -20,17 +19,30 @@ function agregarCarrito() {
     if (carritoGuardado && carritoGuardado.length) {
         let botonId = this.id
         let prodEncontrado = carritoGuardado.find(p => botonId === p.nombre)
-        prodEncontrado.cantidad += 1
-        guardarLocal("Carrito", carritoGuardado)
-        Swal.fire({
-            icon: 'success',
-            title: 'Gracias!',
-            text: 'Has agregado un nuevo item al carrrito',
-            footer: '<a href="">Ver carrito</a>',
+        if (prodEncontrado) {
+            prodEncontrado.cantidad += 1
+            guardarLocal("Carrito", carritoGuardado)
+            Swal.fire({
+                icon: 'success',
+                title: 'Gracias!',
+                text: 'Has agregado un nuevo item al carrrito',
+                footer: '<a href="">Ver carrito</a>',
+            })
+        } else {
+            Swal.fire({
+                icon: 'success',
+                title: 'Gracias!',
+                text: 'Has agregado un nuevo item al carrrito',
+                footer: '<a href="">Ver carrito</a>',
 
-        })
+            })
+            let prodEncontrado = antojos.find(p => botonId === p.nombre)
+            let nuevo = prodEncontrado
+            nuevo.cantidad = 1
+            carritoGuardado.push(nuevo)
+            guardarLocal("Carrito", carritoGuardado)
+        }
     }
-
     else {
         let carrito = []
         let botonId = this.id
@@ -47,8 +59,10 @@ function agregarCarrito() {
         })
     }
     mostrarCarrito()
+    mostrar()
 }
 mostrarCarrito()
+mostrar()
 
 function mostrarCarrito() {
     let carritoGuardado = JSON.parse(localStorage.getItem("Carrito"))
@@ -57,8 +71,9 @@ function mostrarCarrito() {
         elementosCarrito.id = "listaCarrito"
         for (let producto of carritoGuardado) {
             let li = document.createElement("li")
-            li.innerHTML = `<h3 id=${producto.id}> Producto:${producto.nombre}</h3>
+            li.innerHTML = `<h3 id=${producto.id}> Producto: ${producto.nombre}</h3>
         <b> Precio: $${producto.precio} </b>
+        <b> Cantidad: ${producto.cantidad} </b>
         <button id= ${producto.id} class="eliminar">🗑️</button>`
             elementosCarrito.appendChild(li)
         }
@@ -66,20 +81,23 @@ function mostrarCarrito() {
         productosAgregados.innerHTML = ""
         productosAgregados.appendChild(elementosCarrito)
         $(`.eliminar`).click(eliminarProducto)
-        console.log($(`.eliminar`))
     }
 }
 
-let botones = document.getElementsByClassName("eliminar")
+$(`.eliminar`).on("click", eliminarProducto);
 
 function eliminarProducto(e) {
     let button = e.target
     let carrito = JSON.parse(localStorage.getItem("Carrito"))
-    carrito = carrito.filter(producto => producto.id != button.id)
-    console.log(button.id)
-
+    let eliminado = carrito.find(producto => producto.id = button.id)
+    if (eliminado.cantidad <= 1) {
+        carrito = carrito.filter(producto => producto.id != button.id)
+    }
+    else {
+        eliminado.cantidad -= 1
+    }
+    carrito.push(eliminado)
     guardarLocal("Carrito", carrito)
-
     Swal.fire({
         icon: 'success',
         title: 'Eliminado!',
@@ -94,7 +112,6 @@ function calculototal() {
     if (carritoGuardado) {
         if (carritoGuardado.length >= 1) {
             let compra = carritoGuardado.map(item => item.precio).reduce((prev, curr) => prev + curr, 0);
-            console.log(compra)
             return compra
         }
     }
@@ -140,27 +157,47 @@ function calculoEnvio() {
 
 function mostrarEnvio() {
     let cp = Swal.getInput().value
+
+    let codigoPostal = parseInt(Swal.getInput().value);
+
+    if (codigoPostal === 1625) {
+        envio = 0;
+    }
+
+    else if ((codigoPostal >= 1000) && (codigoPostal <= 1499)) {
+        envio = 500;
+    }
+
+    else if ((codigoPostal >= 1500) || (codigoPostal <= 999)) {
+        envio = 600;
+    }
+
+    else {
+        envio = "Inválido";
+    }
+
     Swal.fire({
-        title: 'Envío', 
-        text: 'Tu código Postal es: ' + cp,
+        title: 'Envío',
+        text: 'Tu código postal es: ' + cp + ' Y tu costo estimado de envío es de $ ' + envio,
         focusConfirm: false,
     })
 }
 
 
-function mostrar()
-{let flag = true;
-$("#mostrar").click(() => {
-    if (flag) {
-        $("#listaCarrito").slideUp("slow")
-        $("#mostrar").html("Mostrar")
-    }
-    else {
-        $("#listaCarrito").slideDown("slow")
-        $("#mostrar").html("Ocultar")
-    }
-    flag = !flag;
-})}
+function mostrar() {
+    let flag = true;
+    $("#mostrar").click(() => {
+        if (flag) {
+            $("#listaCarrito").slideUp("slow")
+            $("#mostrar").html("Mostrar")
+        }
+        else {
+            $("#listaCarrito").slideDown("slow")
+            $("#mostrar").html("Ocultar")
+        }
+        flag = !flag;
+    })
+}
 
 
 

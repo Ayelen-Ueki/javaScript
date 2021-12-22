@@ -1,0 +1,8 @@
+[
+    { "id": 1, "nombre": "alfajorcitos", "precio": 500, "cantidad": 0
+    },
+    { "id": 2, "nombre": "aRogel", "precio": 600, "cantidad": 0
+    },
+    { "id": 3, "nombre": "cookies", "precio": 300, "cantidad": 0
+    }
+]
