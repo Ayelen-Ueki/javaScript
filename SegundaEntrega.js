@@ -14,6 +14,7 @@ function guardarLocal(nombre, array) {
     localStorage.setItem(nombre, JSON.stringify(array))
 }
 
+// Para agregar los productos al local storage a medida que se van agregando al carrito
 function agregarCarrito() {
     let carritoGuardado = JSON.parse(localStorage.getItem("Carrito"))
     if (carritoGuardado && carritoGuardado.length) {
@@ -64,6 +65,7 @@ function agregarCarrito() {
 mostrarCarrito()
 mostrar()
 
+// Para agregar los productos al carrito con DOM
 function mostrarCarrito() {
     let carritoGuardado = JSON.parse(localStorage.getItem("Carrito"))
     if (carritoGuardado) {
@@ -72,7 +74,7 @@ function mostrarCarrito() {
         for (let producto of carritoGuardado) {
             let li = document.createElement("li")
             li.innerHTML = `<h3 id=${producto.id}> Producto: ${producto.nombre}</h3>
-        <b> Precio: $${producto.precio} </b>
+        <b> Precio: $${producto.precio * producto.cantidad} </b>
         <b> Cantidad: ${producto.cantidad} </b>
         <button id= ${producto.id} class="eliminar">🗑️</button>`
             elementosCarrito.appendChild(li)
@@ -86,17 +88,17 @@ function mostrarCarrito() {
 
 $(`.eliminar`).on("click", eliminarProducto);
 
+// Para eliminar productos del carrito
 function eliminarProducto(e) {
     let button = e.target
     let carrito = JSON.parse(localStorage.getItem("Carrito"))
-    let eliminado = carrito.find(producto => producto.id = button.id)
-    if (eliminado.cantidad <= 1) {
+    let eliminado = carrito.find(producto => producto.id == button.id)
+    if (eliminado.cantidad == 1) {
         carrito = carrito.filter(producto => producto.id != button.id)
     }
     else {
-        eliminado.cantidad -= 1
+        eliminado.cantidad = eliminado.cantidad - 1
     }
-    carrito.push(eliminado)
     guardarLocal("Carrito", carrito)
     Swal.fire({
         icon: 'success',
@@ -107,18 +109,21 @@ function eliminarProducto(e) {
     mostrarCarrito()
 }
 
+// Para calular el total de la compra (Sin envío)
 function calculototal() {
     let carritoGuardado = JSON.parse(localStorage.getItem("Carrito"))
     if (carritoGuardado) {
         if (carritoGuardado.length >= 1) {
-            let compra = carritoGuardado.map(item => item.precio).reduce((prev, curr) => prev + curr, 0);
-            return compra
+            let suma = 0;
+            for (let producto of carritoGuardado) {
+                suma = suma + (producto.precio * producto.cantidad)
+            }
+            return (suma)
         }
     }
 }
 
-
-
+// Para finalizar la compra y hacer el cálculo del total (con envío)
 function compraFinalizada(e) {
     e.preventDefault()
     if (!calculototal()) {
@@ -134,17 +139,18 @@ function compraFinalizada(e) {
         Swal.fire({
             icon: 'success',
             title: 'Gracias!',
-            text: `Compra finalizada, el precio total es de: ${calculototal()}`,
+            text: `Compra en proceso!`,
+            input: 'number',
+            inputLabel: 'Ingresa tu código postal para saber el precio final',
             footer: '<a href="">Ver carrito</a>',
         })
-        localStorage.clear()
+        $(".swal2-confirm").click(mostrarPrecioEnvio)
     }
 }
 
-
 $("#envio").on("click", calculoEnvio);
 
-
+// Para pedir el código postal para el cálculo del envío
 function calculoEnvio() {
     Swal.fire({
         title: 'Envío',
@@ -155,6 +161,7 @@ function calculoEnvio() {
     $(".swal2-confirm").click(mostrarEnvio);
 }
 
+// Para calcular el envío
 function mostrarEnvio() {
     let cp = Swal.getInput().value
 
@@ -183,7 +190,35 @@ function mostrarEnvio() {
     })
 }
 
+// Para mostrar el total + el envío
+function mostrarPrecioEnvio() {
+    let codigoPostal = parseInt(Swal.getInput().value);
 
+    if (codigoPostal === 1625) {
+        envio = 0;
+    }
+
+    else if ((codigoPostal >= 1000) && (codigoPostal <= 1499)) {
+        envio = 500;
+    }
+
+    else if ((codigoPostal >= 1500) || (codigoPostal <= 999)) {
+        envio = 600;
+    }
+
+    else {
+        envio = "Inválido";
+    }
+
+    Swal.fire({
+        title: 'Envío',
+        text: 'El total de tu compra con envío es de: $ ' + (calculototal() + envio),
+        focusConfirm: false,
+    })
+    localStorage.clear()
+}
+
+// Para ocultar y mostrar el carrito
 function mostrar() {
     let flag = true;
     $("#mostrar").click(() => {
@@ -199,6 +234,14 @@ function mostrar() {
     })
 }
 
+// Agregar clases
+// Eliminar los botones que no hacen nada
+// Formulario: llamar id del form con Jquery y usar evento "submit" para mostrar los datos de los inputs
+// Mostrar carrito con Boostrap en el ícono 
 
+// Función de búsqueda
+function buscar() {
+    let inputSearch = document.getElementById("busqueda");
+    let buscado = inputSearch.value.toUpperCase();
 
-
+}

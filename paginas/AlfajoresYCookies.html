@@ -5,12 +5,19 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Feelin Pastelería | Contacto</title>
+    <title>Feelin Pastelería | Antojos | Productos</title>
+    <meta name="keywors"
+        content="tortas, cookies, galletas, alfajores, casero, brownie, pastelería en Escobar, box dulces, caja dulce, desayuno para regalar, mesa dulce, pastelería en Escobar, feelin pastelería, antojos, productos de feelin pastelería">
+    <meta name="description"
+        content="Feelin Pastelería: pastelería hecha con amor. Emprendimiento local ubicado en Belén de Escobar. Hacemos tortas, coockies, alfajores y más. Armamos boxes de regalo perosonalizadas. Pedidos por encargo">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        <link rel="stylesheet" href="../feelin.css">
-    <meta name="keywors" content="feelin pastelería, contacto feelin pasteleria">
+    <link rel="stylesheet" href="../feelin.css">
     <link rel="shortcut icon" href="../imagenes/LogoFavicon.png">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 
 <body class="container-fluid">
@@ -59,9 +66,9 @@
                         </ul>
                         <div class="container-fluid">
                             <a class="navbar-brand" href="Carrito.html">
-                              <img src="../imagenes/cart icon.png" alt="" width="25" height="25">
+                                <img src="../imagenes/cart icon.png" alt="" width="25" height="25">
                             </a>
-                          </div>
+                        </div>
                         <form class="d-flex">
                             <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
                             <button id="busqueda" class="btn btn-outline-success" type="submit">Search</button>
@@ -70,22 +77,36 @@
                 </div>
             </nav>
         </header>
-        <section class="content">
-            <form class="p-5 form">
-                <div class="conteiner-sm w-75 bg-warning p-5 text">
-                    <h2 class="text-center">Contactanos!</h2>
-                    <div class="mb-3">
-                        <label for="exampleInputEmail1" class="form-label ">Email address</label>
-                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                        <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+        <section>
+            <main class="justify-content-start p-4 content antojos">
+                <h1 class="text-center">Nuestros productos</h1>
+                <div class="conteiner-fluid">
+                    <div class="row">
+                        <div class="col text-center">
+                            <li class="alfajorcitos"> Alfajorcitos
+                                <br><img width="200" src="../imagenes/Alfajorcitos.png" alt="Alfajorcitos"></br>
+                                <p> $500 por docena </p>
+                                <button id="alfajorcitos" class="botonCompra">Agregar al carrito</button>
+                            </li>
+                        </div>
+                        <div class="col text-center">
+                            <li class="alfajorcitosRogel"> Alfajorcitos Rogel
+                                <br><img width="200" src="../imagenes/Alfajorcito rogel.png"
+                                    alt="Alfajorcitos rogel"></br>
+                                <p> $600 por 1/2 docena </p>
+                                <button id="aRogel" class="botonCompra">Agregar al carrito</button>
+                            </li>
+                        </div>
+                        <div class="col text-center">
+                            <li class="cookies"> Cookies
+                                <br><img width="200" src="../imagenes/Vegan Cookies.png" alt="Cookies"></br>
+                                <p> $500 por 1/2 docena </p>
+                                <button id="cookies" class="botonCompra">Agregar al carrito</button>
+                            </li>
+                        </div>
                     </div>
-                    <div class="mb-3 w-100">
-                        <label for="exampleInputPassword1" class="form-label">Password</label>
-                        <input type="password" class="form-control" id="exampleInputPassword1">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
                 </div>
-            </form>
+            </main>
         </section>
         <section>
 
@@ -102,17 +123,18 @@
         <div class="col">
             Ante cualquier duda podés comunicarte a través de:
             <div>
-                <a href="https://api.whatsapp.com/send?phone=+5491136430055"> <img width=20px src="../imagenes/Whatsapp Logo.png" alt="Whatsapp Logo"> </a>
-                <a href="mailto:aye_ueki_011@hotmail.com" target="_blank"> <img width=20px src="../imagenes/Mail Icon.png" alt="Mail Icon"> </a>
-                <a href="https://www.instagram.com/feelin.pasteleria/?hl=es-la" target="_blank"> <img width=20px src="../imagenes/InstagramLogo.png" alt="Instagram Logo"> </a>
+                <a href="https://api.whatsapp.com/send?phone=+5491136430055"> <img width=20px
+                        src="../imagenes/Whatsapp Logo.png" alt="Whatsapp Logo"> </a>
+                <a href="mailto:aye_ueki_011@hotmail.com" target="_blank"> <img width=20px
+                        src="../imagenes/Mail Icon.png" alt="Mail Icon"> </a>
+                <a href="https://www.instagram.com/feelin.pasteleria/?hl=es-la" target="_blank"> <img width=20px
+                        src="../imagenes/InstagramLogo.png" alt="Instagram Logo"> </a>
             </div>
         </div>
         </div>
     </footer>
     </div>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
-        crossorigin="anonymous"></script>
+    <script src="../SegundaEntrega.js"></script>
 </body>
 
 </html>
