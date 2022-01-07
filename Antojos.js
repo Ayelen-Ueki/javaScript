@@ -1,6 +1,6 @@
 const antojos = [];
 
-$.getJSON(`../antojos.json`, function (antojate) {
+$.getJSON(`antojos.json`, function (antojate) {
     antojate.forEach(productos => antojos.push(productos))
 })
 
@@ -240,8 +240,9 @@ function mostrar() {
 // Mostrar carrito con Boostrap en el ícono 
 
 // Función de búsqueda
-function buscar() {
-    let inputSearch = document.getElementById("busqueda");
-    let buscado = inputSearch.value.toUpperCase();
+// function buscar() {
+//     let inputSearch = document.getElementById("busqueda");
+//     let buscado = inputSearch.value.toUpperCase();
+// }
 
-}
+// $("#submitirConsulta").on("click", guardarEmail());
