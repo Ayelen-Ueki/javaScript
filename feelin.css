@@ -104,12 +104,16 @@ padding: 4rem;
 }
 
 .respuesta{
-  padding: 1rem;
+  padding: 2rem;
   margin: 0rem 1rem 2rem 1rem;
-  }
+}
 
-  .fotoProductos{
-    height: 10rem;
-    border:solid;
-    margin: 1rem;
-  }
+.fotoProductos{
+  height: 10rem;
+  border:solid;
+  margin: 1rem;
+}
+
+.botonesPreguntas{
+  margin: 3rem;
+}
