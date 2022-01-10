@@ -94,7 +94,16 @@ footer {
     padding: 0.2rem 0.5rem 0.2rem 0.5rem;
 }
 
-.carrito button:hover {
+.carrito button:hover{
     background-color:#FF7800;
     color: white;
 }
+
+.preguntas{
+padding: 4rem;
+}
+
+.respuesta{
+  padding: 1rem;
+  margin: 0rem 1rem 2rem 1rem;
+  }
