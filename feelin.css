@@ -35,6 +35,10 @@ header {
 .content {
   padding: 1rem; }
 
+.productos{
+  margin: 2rem;
+}
+
 .feelin {
   display: flex;
   justify-content: center;
